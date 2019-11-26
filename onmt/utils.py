@@ -27,10 +27,10 @@ def checkpoint_paths(path, pattern=r'model_ppl_(\d+).(\d+)\_e(\d+).(\d+).pt'):
 
     entries = []
     for i, f in enumerate(files):
-        m = pt_regexp.fullmatch(f)
+        m = pt_regexp.search(f)
         if m is not None:
             idx = int(m.group(1)) if len(m.groups()) > 0 else i
-            entries.append((idx, m.group(0)))
+            entries.append((idx, f))
     # return [os.path.join(path, x[1]) for x in sorted(entries, reverse=True)]
     return [os.path.join(path, x[1]) for x in entries]
 
